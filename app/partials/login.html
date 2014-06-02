@@ -1,0 +1,123 @@
+<form ng-controller="cadastroInicialCtrl">
+    <div style="margin-bottom: 35px" class="col-xs-12 col-md-6">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Cadastre-se agora mesmo! É fácil e rápido!</div>
+
+            <div class="panel-body">
+                <div class="alert alert-danger" ng-show="mensagem !== ''">
+                    {{mensagem}}
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-8">
+                    <label>Tipo de cadastro</label>
+
+                    <div class="clearfix"></div>
+
+                    <div class="btn-group" data-toggle="buttons">
+                        <label id="tipCad1" class="btn btn-default showPopover" data-content="Escolha esta opção se você deseja cadastrar seu currículo." ng-click="tipoCadastro=1"> 
+                            <input type="radio" name="tipoCadastro" /> Pessoal
+                        </label> 
+                        <label id="tipCad2" class="btn btn-default showPopover" data-content="Escolha esta opção se você é uma empresa e deseja cadastrar vagas." ng-click="tipoCadastro=2"> 
+                            <input type="radio" name="tipoCadastro" /> Empresarial
+                        </label>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="form-group col-xs-12 col-sm-6 col-md-8">
+                    <label for="cadNom">Nome</label>
+                    <input type="text" ng-model="usuario.nome" class="form-control" maxlength="50" size="30" id="cadNom" />
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="form-group col-xs-12 col-sm-5 col-md-7 col-lg-6">
+                    <label for="cadEma">Email</label>
+                    <input type="text" ng-model="usuario.email" class="form-control" maxlength="45" size="30" id="cadEma" />
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="form-group col-xs-12 col-sm-3 col-md-4">
+                    <label for="cadSen">Senha</label>
+                    <input type="password" ng-model="usuario.senha" class="form-control" maxlength="20" size="10" id="cadSen" />
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-xs-12">
+                    <button ng-click="cadastrar()" class="btn btn-default col-xs-12 col-sm-2 col-md-3">Cadastrar</button>
+                </div>
+
+                <div class="clearfix"></div>
+                <br />
+            </div>
+        </div>
+    </div>
+</form>
+
+<form ng-controller="loginCtrl">
+    <div class="col-xs-12 col-md-6" style="margin-bottom: 35px">
+        <div class="panel panel-default">
+            <div class="panel-heading">Já é cadastrado? Faça login abaixo!</div>
+
+            <div class="panel-body">
+                <div class="alert alert-danger" ng-show="mensagem !== ''">
+                    {{mensagem}}
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-5 col-md-7 col-lg-6">
+                    <label for="logEma">Email</label>
+                    <input type="text" ng-model="usuario.email" ng-init="usuario.email=''" class="form-control" maxlength="45" size="30" id="logEma" />
+                </div>
+                
+                <div class="clearfix"></div>
+
+                <div class="form-group col-xs-12 col-sm-3 col-md-4">
+                    <label for="logSen">Senha</label>
+                    <input type="password" ng-model="usuario.senha" ng-init="usuario.senha=''" class="form-control" maxlength="20" size="10" id="logSen" />
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="form-group col-xs-12">
+                    <button ng-click="login(usuario)" class="btn btn-default col-xs-12 col-sm-2">Entrar</button>
+                </div>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div class="col-xs-12">
+                    <i class="glyphicon glyphicon-user"></i> <a href='#/recuperar-senha'>Esqueci minha senha</a>
+                </div>
+
+                <div class="clearfix"></div>
+                <br />
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    ;
+    (function($) {
+        $('.showPopover').popover({trigger: 'hover', container: 'body', toggle: 'popover', placement: 'bottom'});
+    })(jQuery);
+
+
+    var cadastroInicial = (function($) {
+
+        return {
+            selecionarTipoCadastro: function(codigo) {
+                $("#cadTip").val(codigo);
+            },
+            initUI: function() {
+                var codigoTipoCadastro = $("#cadTip").val();
+            }
+
+        };
+
+    })(jQuery);
+</script>
