@@ -1,7 +1,7 @@
 <?php
 $retorno = array(
     'usuario' => array(
-        'nome' => "Claudio Antonio Silva Santos",
+        'nome' => "Claudio Nestor Pereira Santos",
         'email' => "claudio@teste.com.br",
         'dataNascimento' =>  "01/02/2001",
         'sexo' =>  "M",
