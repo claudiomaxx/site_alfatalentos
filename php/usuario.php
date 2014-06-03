@@ -1,12 +1,12 @@
 <?php
-/*
 $retorno = array(
     'usuario' => array(
         'nome' => "Claudio Antonio Silva Santos",
         'email' => "claudio@solee.com.br",
         'dataNascimento' =>  "09/02/1987",
         'sexo' =>  "M",
-        'estadoCivil' => array(1 => "Casado"),
+        'estadoCivil' => array('codigo' => 2, 'descricao' => "Casado(a)"),
+        'filhos' => '1',
         'habilitacao' =>  "AB",
         'fumante' =>  "N",
         'veiculo' =>  "S",
@@ -22,10 +22,10 @@ $retorno = array(
         'telefoneCelular' =>  "61 91090039"
     )
 );
-*/
 
+/*
 $retorno = array(
     'mensagem' => 'Usuário não encontrado.'
 );
-
+*/
 echo json_encode($retorno);
