@@ -7,7 +7,6 @@
         {{mensagem}}
     </div>
 
-    <button ng-click="busca()">aaaaaaa</button>
     <ul id="myTab" class="nav nav-tabs nav-justified">
         <li class="active"><a href="#/dados-basicos" data-toggle="tab" id="lnkDadBas">Dados Básicos</a></li>
         <li><a href="#/experiencia-profissional" data-toggle="tab" id="lnkExpPro">Experiência Profissional</a></li>
@@ -66,7 +65,7 @@
 		<div class="form-group col-xs-12">
                     <label class="col-sm-3 col-md-2" for="cadFil">Qtd Filhos</label>
                     <div class="col-sm-2 col-md-1">
-                        <input type="text" class="form-control numberField" size="2" maxlength="2" ng-model="usuario.filhos" id="cadFil" />
+                        <input type="text" class="form-control numberField" size="2" maxlength="2" ng-model="usuario.qtdFilhos" id="cadFil" />
                     </div>
 		</div>
 		
@@ -74,7 +73,7 @@
                     <label class="col-sm-3 col-md-2">Possui Habilitação?</label>
                     <div class="col-sm-9 col-md-10">
                         <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default {{ usuario.habilitacao == habilitacao ? 'active' : ''}}" ng-click="usuario.habilitacao='{{habilitacao}}'" ng-repeat="habilitacao in listaHabilitacao">
+                            <label class="btn btn-default {{ usuario.carteiraHabilitacao == habilitacao ? 'active' : ''}}" ng-click="usuario.carteiraHabilitacao=habilitacao" ng-repeat="habilitacao in listaHabilitacao">
                                 <input type="radio" name="hab" value="{{habilitacao}}"/> {{habilitacao}}
                             </label>
                         </div>
@@ -99,10 +98,10 @@
                     <label class="col-sm-3 col-md-2">Veículo Próprio?</label>
                     <div class="col-sm-9 col-md-10">
                         <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default {{usuario.veiculo == 'S' ? 'active' : ''}}" ng-click="usuario.veiculo='S'">
+                            <label class="btn btn-default {{usuario.veiculoProprio == 'S' ? 'active' : ''}}" ng-click="usuario.veiculoProprio='S'">
                                 <input type="radio" name="vei"/> Sim
                             </label>
-                            <label class="btn btn-default {{usuario.veiculo == 'N' ? 'active' : ''}}" ng-click="usuario.veiculo='N'">
+                            <label class="btn btn-default {{usuario.veiculoProprio == 'N' ? 'active' : ''}}" ng-click="usuario.veiculoProprio='N'">
                                 <input type="radio" name="vei"/> Não
                             </label>
                         </div>
@@ -112,7 +111,7 @@
 		<div class="form-group col-xs-12">
                     <label class="col-sm-3 col-md-2" for="cadPre">Pretensão Salarial</label>
                     <div class="col-sm-3 col-md-2">
-                        <input type="text" class="form-control" size="45" maxlength="45" ng-model="usuario.pretensaoSalarial" id="cadPre" />
+                        <input type="text" class="form-control" size="17" maxlength="17" ng-model="usuario.pretensaoSalarial" id="cadPre" />
                     </div>
 		</div>
 		
@@ -183,7 +182,7 @@
                 <div class="form-group col-xs-12">
                     <label class="col-sm-3 col-md-2"> </label>
                     <div class="col-xs-12 col-sm-2">
-                        <button class="btn btn-default col-xs-12" ng-click="salvar()">Salvar</button>
+                        <button class="btn btn-default col-xs-12" ng-click="salvar(usuario)">Salvar</button>
                     </div>
                 </div>
 	

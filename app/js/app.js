@@ -11,19 +11,16 @@ app.config(['$routeProvider', function($routeProvider){
     $routeProvider.otherwise({redirectTo: '/login'});
 }]);
 
-app.factory('usuarioService', function() {
-    var usuario = {
-        
-    };
-    
+app.factory('usuarioService',['$location', '$http', function($location, $http) {
     return {
-        add : function(u) {
-            usuario = u;
-            console.log(u);
-            console.log(usuario);
-        },
-        get : function() {
-            return usuario;
+        getUsuario : function(){
+            return $http.get('/site_alfatalentos/php/usuario.php');
         }
     };
-});
+}]);
+
+app.controller('mainCtrl', ['$scope', '$location', function($scope, $location){
+    $scope.go = function(to) {
+        $location.path(to);
+    }
+}]);

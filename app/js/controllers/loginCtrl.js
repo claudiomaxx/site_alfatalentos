@@ -18,7 +18,6 @@ app.controller('loginCtrl', ['$scope', '$location', '$http', function($scope, $l
             var $promise = $http.post('/site_alfatalentos/php/login.php', usuario);
 
             $promise.then(function(retorno){
-                console.log(retorno.data);
                 if(retorno.data.mensagem === '' && retorno.data.usuario instanceof Object) {
                     $location.path( "/dados-basicos" );
 

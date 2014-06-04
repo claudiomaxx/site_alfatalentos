@@ -12,13 +12,14 @@
 	    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
     </head>
-    <body ng-controller="appController">
-        {{teste}}
+    <body ng-controller="mainCtrl">
+        
         <header id="site-header">
             <h1><a href="#/dados-basicos">Alfa Soluções RH</a></h1>
 
             <div class="container" style="background: #606; padding: 22px 0 30px; color: #fff;">
-                <div style="padding: 0 15px"><span ng-show="false">{{'Claudio Silva'}}</span><span ng-show="true">{{'Bem vindo!'}}</span></div>
+                <div style="padding: 0 15px" class="col-xs-6">Bem vindo!</div>
+                <div style="padding: 0 15px; text-align: right" class="col-xs-6"><a ng-click="go('/')" href="javascript:;" style="color: #fff">Sair</a></div>
             </div>
 	</header>
         
@@ -47,16 +48,8 @@
         <script src="/site_alfatalentos/app/js/controllers/loginCtrl.js"></script>
         <script src="/site_alfatalentos/app/js/controllers/cadastroInicialCtrl.js"></script>
         <script src="/site_alfatalentos/app/js/controllers/dadosBasicosCtrl.js"></script>
+        <script src="/site_alfatalentos/app/js/controllers/appCtrl.js"></script>
         <script src="/site_alfatalentos/app/js/services/loginService.js"></script>
-        
-        <script>
-            
-            app.controller('appController', ['$scope', 'loginService', function($scope, loginService){
-                $scope.teste = loginService.usuarioLogado;
-            }]);
-            
-        </script>
-        {{1+1}}
     </body>
     
 </html>
