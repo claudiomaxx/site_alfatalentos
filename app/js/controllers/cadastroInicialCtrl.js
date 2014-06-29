@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('cadastroInicialCtrl', ['$http', '$scope', '$location', function($http, $scope, $location){
+app.controller('cadastroInicialCtrl', ['$http', '$scope', '$location', 'usuarioService', function($http, $scope, $location, usuarioService){
     
     $http.get('/site_alfatalentos/php/logout.php');
     
@@ -40,6 +40,7 @@ app.controller('cadastroInicialCtrl', ['$http', '$scope', '$location', function(
 
             $promise.then(function(retorno){
                 if(retorno.data.mensagem === '') {
+                    usuarioService.usuarioLogado = retorno.data.usuario;
                     $location.path( "/dados-basicos" );
 
                 } else {

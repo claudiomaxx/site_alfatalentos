@@ -1,35 +1,147 @@
 'use strict';
 
-app.controller('experienciaProfissionalCtrl', ['$http', '$scope', '$location', function($http, $scope, $location){
+app.controller('experienciaProfissionalCtrl', ['$http', '$scope', '$location', 'usuarioService', function($http, $scope, $location, usuarioService){
     
+    $scope.formAtivo = false;
     $scope.mensagem = "";
-    $scope.tipoCadastro = 0;
-    $scope.usuario = {
-        nome: "",
-        email: "",
-        senha: ""
+    $scope.usuario = "";
+    $scope.items = [];
+    $scope.experiencia = {
+        id: 0,
+        usuario_id: 0,
+        empresa: "",
+        cargo: "",
+        atividades: "",
+        motivoSaida: "",
+        dataEntrada: "",
+        dataSaida: ""
     };
     
-    $scope.cadastrar = function(){
-        if($scope.tipoCadastro < 1 || $scope.tipoCadastro > 2) {
-            $scope.mensagem = "Tipo de cadastro não selecionado.";
+    var itemAntesEdicao = {};
+    
+    $scope.selecionar = function(item) {
+        itemAntesEdicao = angular.copy(item);
+        $scope.experiencia = item;
+        $scope.formAtivo = true;
+    };
+    
+    $scope.cancelar = function(item) {
+        angular.copy(itemAntesEdicao, item);
+        itemAntesEdicao = {};
+        
+        $scope.experiencia = {
+            id: 0,
+            usuario_id: 0,
+            empresa: "",
+            cargo: "",
+            atividades: "",
+            motivoSaida: "",
+            dataEntrada: "",
+            dataSaida: ""
+        };
+        
+        $scope.formAtivo = false;
+    };
+    
+    $scope.excluir = function(item) {
+        
+        $http.post('/site_alfatalentos/php/experiencia-profissional-delete.php', { id: item.id, usuario_id: $scope.usuario.id}).success(function(retorno){
+            if(retorno.mensagem === '') {
+                $scope.mensagem = "Dados excluídos com sucesso!";
+                
+                if(retorno.dados instanceof Object) {
+                    $scope.items = retorno.dados;
+                    $scope.formAtivo = false;
+                
+                } else {
+                    $scope.items = [];
+                    $scope.formAtivo = true;
+                }
+
+            } else {
+                $scope.items = [];
+                $scope.mensagem = retorno.mensagem;
+            }
+        });
+    };
+    
+    $scope.novo = function() {
+        $scope.experiencia = {
+            id: 0,
+            usuario_id: 0,
+            empresa: "",
+            cargo: "",
+            atividades: "",
+            motivoSaida: "",
+            dataEntrada: "",
+            dataSaida: ""
+        };
+        
+        $scope.formAtivo = true;
+    };
+    
+    $scope.salvar = function(){
+        $scope.mensagem = "";
+        
+        if($scope.experiencia.empresa === "") {
+            $scope.mensagem = "Empresa não informada.";
+            
+        } else if($scope.experiencia.cargo === "") {
+            $scope.mensagem = "Cargo não informado.";
+            
+        } else if($scope.experiencia.atividades === "") {
+            $scope.mensagem = "Atividades não informadas.";    
+            
+        } else if($scope.experiencia.dataEntrada === "") {
+            $scope.mensagem = "Data Entrada não informada.";    
             
         } else {
-            var cadastro = {
-                tipoCadastro: $scope.tipoCadastro,
-                usuario: $scope.usuario
-            };
-
-            var $promise = $http.post('/site_alfatalentos/php/cadastro-inicial.php', cadastro);
+            $scope.experiencia.usuario_id = $scope.usuario.id;
+            
+            var $promise = $http.post('/site_alfatalentos/php/experiencia-profissional.php', $scope.experiencia);
 
             $promise.then(function(retorno){
-                if(retorno.data.mensagem === '') {
-                    $location.path( "/dados-basicos" );
+                if(retorno.data.mensagem === '' && retorno.data.dados instanceof Object) {
+                    $scope.mensagem = "Dados salvos com sucesso!";
+                    $scope.items = retorno.data.dados;
+                    
+                    $scope.experiencia = {
+                        id: 0,
+                        usuario_id: 0,
+                        empresa: "",
+                        cargo: "",
+                        atividades: "",
+                        motivoSaida: "",
+                        dataEntrada: "",
+                        dataSaida: ""
+                    };
 
+                    
+                    $scope.formAtivo = false;
+                    
                 } else {
                     $scope.mensagem = retorno.data.mensagem;
                 }
             });
         }
     };
+    
+    usuarioService.getUsuario().success(function(response){
+        if(response.mensagem === '' && response.usuario instanceof Object) {
+            $scope.usuario = response.usuario;
+            
+            $http.post('/site_alfatalentos/php/experiencia-profissional-lista.php', { usuario_id : $scope.usuario.id}).success(function(retorno){
+                if(retorno.dados) {
+                    $scope.items = retorno.dados;
+                }
+                
+                if($scope.items.length === 0) {
+                    $scope.formAtivo = true;
+                }
+            });
+            
+        } else {
+            $location.path('/');
+        }
+    });
 }]);

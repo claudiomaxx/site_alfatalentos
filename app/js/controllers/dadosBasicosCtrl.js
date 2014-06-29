@@ -3,9 +3,14 @@
 app.controller('dadosBasicosCtrl', ['$scope', '$location', '$http', '$filter', 'usuarioService', function($scope, $location, $http, $filter, usuarioService){
     $scope.mensagem = "";
     
+    console.log(usuarioService.usuarioLogado);
+    
     usuarioService.getUsuario().success(function(response){
         if(response.mensagem === '' && response.usuario instanceof Object) {
             $scope.usuario = response.usuario;
+            console.log($scope.usuario);
+            
+            usuarioService.usuarioLogado = response.usuario;
             
             $scope.usuario.dataNascimento = $filter('date')($scope.usuario.dataNascimento, "dd/MM/yyyy");
             $scope.usuario.pretensaoSalarial = $filter('number')($scope.usuario.pretensaoSalarial, 2);
@@ -27,7 +32,9 @@ app.controller('dadosBasicosCtrl', ['$scope', '$location', '$http', '$filter', '
     $scope.listaHabilitacao = [ 'AB', 'A', 'B', 'C', 'D', 'E'];
    
     $scope.salvar = function(usuario){
-        usuario.estadoCivil_id = usuario.estadoCivil.codigo;
+        if(usuario.estadoCivil instanceof Object) {
+            usuario.estadoCivil_id = usuario.estadoCivil.codigo;
+        }
 
         var $promise = $http.post('/site_alfatalentos/php/dados-basicos.php', usuario);
 
@@ -36,7 +43,7 @@ app.controller('dadosBasicosCtrl', ['$scope', '$location', '$http', '$filter', '
                 $scope.mensagem = "Dados salvos com sucesso!";
 
             } else {
-                $scope.data.mensagem = retorno.data.mensagem;
+                $scope.mensagem = retorno.data.mensagem;
             }
         });
     };

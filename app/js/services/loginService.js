@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('loginService', ['$http', '$q', function($http, $q){
+app.factory('loginService', ['$http', function($http){
 
     return {
         login: function(usuario){

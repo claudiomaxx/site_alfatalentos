@@ -3,7 +3,10 @@
 </div>
 
 <div class="col-xs-12">
-
+    <div class="alert alert-danger" ng-show="mensagem !== ''">
+        {{mensagem}}
+    </div>
+    
     <ul id="myTab" class="nav nav-tabs nav-justified">
         <li><a href="#/dados-basicos" data-toggle="tab" id="lnkDadBas">Dados Básicos</a></li>
         <li class="active"><a href="#/experiencia-profissional" data-toggle="tab" id="lnkExpPro">Experiência Profissional</a></li>
@@ -12,39 +15,111 @@
     </ul>
 
     <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="dadosBasicos">
+        <div class="tab-pane fade active in" id="experienciaProfissional">
             <br/>
+            
+            <div class="col-xs-12" ng-hide="formAtivo">
+                
+                <button ng-click="novo()" class="btn btn-success">Incluir Novo</button><br/><br/>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Cargo</th>
+                            <th>Data Entrada</th>
+                            <th>Data Saída</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in items">
+                            <td>{{item.empresa}}</td>
+                            <td>{{item.cargo}}</td>
+                            <td>{{item.dataEntrada}}</td>
+                            <td>{{item.dataSaida}}</td>
+                            <td><button ng-click="selecionar(item)" class="btn btn-default">Editar</button> <a href="" ng-click="excluir(item)" class="btn btn-default text-danger">Excluir</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <form ng-show="formAtivo">
+		<div class="form-group col-xs-12">
+                    <label class="col-sm-3 col-md-2" for="cadEmp">Empresa</label>
+                    <div class="col-sm-5">
+                        <input type="text" ng-model="experiencia.empresa" class="form-control" maxlength="45" size="30" id="cadEmp" />
+                    </div>
+		</div>
+		
+		<div class="form-group col-xs-12">
+                    <label class="col-sm-3 col-md-2" for="cadCar">Cargo</label>
+                    <div class="col-sm-5">
+                        <input type="text" ng-model="experiencia.cargo" class="form-control" maxlength="45" size="30" id="cadCar" />
+                    </div>
+		</div>
+		
+		<div class="form-group col-xs-12">
+                    <label class="col-sm-3 col-md-2" for="cadAti">Atividades</label>
+                    <div class="col-sm-9 col-md-10">
+                        <textarea ng-model="experiencia.atividades" class="form-control" cols="50" rows="3" id="cadAti" />
+                    </div>
+		</div>
+		
+		<div class="form-group col-xs-12">
+                    <label class="col-sm-3 col-md-2" for="cadSai">Motivo saída</label>
+                    <div class="col-sm-9 col-md-10">
+                        <textarea ng-model="experiencia.motivoSaida" class="form-control" cols="50" rows="3" id="cadSai" />
+                    </div>
+		</div>
+		
+		<div class="form-group col-xs-12">
+                    <label class="col-sm-3 col-md-2" for="cadDen">Data entrada</label>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <input type="text" ng-model="experiencia.dataEntrada" class="form-control dataField" maxlength="10" size="10" id="cadDen" />
+                    </div>
+		</div>
+		
+		<div class="form-group col-xs-12">
+                    <label class="col-sm-3 col-md-2" for="cadDai">Data saída</label>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <input type="text" ng-model="experiencia.dataSaida" class="form-control dataField" maxlength="10" size="10" id="cadDai" />
+                    </div>
+		</div>
+
+                <br/>
+                <div class="form-group col-xs-12">
+                    <label class="col-sm-3 col-md-2"> </label>
+                    <div class="col-xs-12 col-sm-2">
+                        <button class="btn btn-default col-xs-12" ng-click="salvar(experiencia)">Salvar</button>
+                        <button class="btn btn-default col-xs-12" ng-click="cancelar(experiencia)">Cancelar</button>
+                    </div>
+                </div>
+	
+                <div class="clearfix"></div><br/>
+            </form>
         </div>
     </div>
 </div>
 
-<!--
 <script>
-jQuery(function($){
-    $('#myTab a').click(function (e) {
-        e.preventDefault()
-        $(this).tab('show');
-    });
+    ;
+    (function($) {
+        $(".numberField").mask("9?9");
+        $(".dataField").mask("99/99/9999");
+        $(".mesAnoField").mask("99/9999");
+        $(".cepField").mask("99999-999");
 
-
-});
-
-var selDadBas = function(){
-        $("#lnkExpPro").click();
-};
-
-var selExpPro = function(){
-        $("#lnkDadBas").click();
-};
-
-var selForAca = function(){
-        $("#lnkForAca").click();
-};
-
-var selIdi = function(){
-        $("#lnkIdi").click();
-};
-
-
-</script>			
--->
+        $('.foneField').focusout(function(){
+            var phone, element;
+            element = $(this);
+            element.unmask();
+            phone = element.val().replace(/\D/g, '');
+            if(phone.length > 10) {
+                element.mask("(99) 99999-999?9");
+            } else {
+                element.mask("(99) 9999-9999?9");
+            }
+        }).trigger('focusout');
+    })(jQuery);
+</script>

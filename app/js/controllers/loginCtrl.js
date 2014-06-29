@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('loginCtrl', ['$scope', '$location', '$http', function($scope, $location, $http){
+app.controller('loginCtrl', ['$scope', '$location', '$http', 'usuarioService', function($scope, $location, $http, usuarioService){
     
     $scope.mensagem = "";
     
@@ -19,6 +19,7 @@ app.controller('loginCtrl', ['$scope', '$location', '$http', function($scope, $l
 
             $promise.then(function(retorno){
                 if(retorno.data.mensagem === '' && retorno.data.usuario instanceof Object) {
+                    usuarioService.usuarioLogado = retorno.data.usuario;
                     $location.path( "/dados-basicos" );
 
                 } else {

@@ -22,7 +22,7 @@
 		<div class="form-group col-xs-12">
                     <label class="col-sm-3 col-md-2" for="cadNom">Nome</label>
                     <div class="col-sm-5">
-                        <input type="text" ng-model="usuario.nome" class="form-control" maxlength="50" size="30" id="cadNom" />
+                        <input type="text" ng-model="usuario.nome" class="form-control uppercase" maxlength="50" size="30" id="cadNom" />
                     </div>
 		</div>
 		
@@ -65,7 +65,7 @@
 		<div class="form-group col-xs-12">
                     <label class="col-sm-3 col-md-2" for="cadFil">Qtd Filhos</label>
                     <div class="col-sm-2 col-md-1">
-                        <input type="text" class="form-control numberField" size="2" maxlength="2" ng-model="usuario.qtdFilhos" id="cadFil" />
+                        <input type="text" class="form-control" numbers-only="numbers-only" size="2" maxlength="2" ng-model="usuario.qtdFilhos" id="cadFil" />
                     </div>
 		</div>
 		
@@ -111,42 +111,42 @@
 		<div class="form-group col-xs-12">
                     <label class="col-sm-3 col-md-2" for="cadPre">Pretensão Salarial</label>
                     <div class="col-sm-3 col-md-2">
-                        <input type="text" class="form-control" size="17" maxlength="17" ng-model="usuario.pretensaoSalarial" id="cadPre" />
+                        <input type="text" class="form-control valor" numbers-only="numbers-only" format="number" size="17" maxlength="17" ng-model="usuario.pretensaoSalarial" id="cadPre" />
                     </div>
 		</div>
 		
 		<div class="form-group col-xs-12">
                     <label class="col-sm-3 col-md-2" for="cadEst">Estado</label>
                     <div class="col-sm-2 col-md-1">
-                        <input type="text" class="form-control uppercase" size="2" maxlength="2" ng-model="usuario.estado" id="cadEst" />
+                        <input type="text" class="form-control uppercase" text-only="text-only" size="2" maxlength="2" ng-model="usuario.estado" id="cadEst" />
                     </div>
 		</div>
 		
 		<div class="form-group col-xs-12">
                     <label class="col-sm-3 col-md-2" for="cadCid">Cidade</label>
                     <div class="col-sm-4 col-md-3">
-                        <input type="text" class="form-control" size="45" maxlength="45" ng-model="usuario.cidade" id="cadCid" />
+                        <input type="text" class="form-control uppercase" text-only="text-only" size="45" maxlength="45" ng-model="usuario.cidade" id="cadCid" />
                     </div>
 		</div>
 		
 		<div class="form-group col-xs-12">
                     <label class="col-sm-3 col-md-2" for="cadEnd">Endereço</label>
                     <div class="col-sm-4 col-md-3">
-                        <input type="text" class="form-control" size="45" maxlength="45" ng-model="usuario.endereco" id="cadEnd" />
+                        <input type="text" class="form-control uppercase" size="45" maxlength="45" ng-model="usuario.endereco" id="cadEnd" />
                     </div>
 		</div>
 		
 		<div class="form-group col-xs-12">
                     <label class="col-sm-3 col-md-2" for="cadCom">Complemento</label>
                     <div class="col-sm-4 col-md-3">
-                        <input type="text" class="form-control" size="45" maxlength="45" ng-model="usuario.complemento" id="cadCom" />
+                        <input type="text" class="form-control uppercase" size="45" maxlength="45" ng-model="usuario.complemento" id="cadCom" />
                     </div>
 		</div>
 		
 		<div class="form-group col-xs-12">
                     <label class="col-sm-3 col-md-2" for="cadBai">Bairro</label>
                     <div class="col-sm-4 col-md-3">
-                        <input type="text" class="form-control" size="45" maxlength="45" ng-model="usuario.bairro" id="cadBai" />
+                        <input type="text" class="form-control uppercase" text-only="text-only" size="45" maxlength="45" ng-model="usuario.bairro" id="cadBai" />
                     </div>
 		</div>
 		
@@ -191,3 +191,25 @@
         </div>
     </div>
 </div>
+<script>
+    ;
+    (function($) {
+        $(".notNumeric").mask("a?a");
+        $(".numberField").mask("9?9");
+        $(".dataField").mask("99/99/9999");
+        $(".mesAnoField").mask("99/9999");
+        $(".cepField").mask("99999-999");
+
+        $('.foneField').focusout(function(){
+            var phone, element;
+            element = $(this);
+            element.unmask();
+            phone = element.val().replace(/\D/g, '');
+            if(phone.length > 10) {
+                element.mask("(99) 99999-999?9");
+            } else {
+                element.mask("(99) 9999-9999?9");
+            }
+        }).trigger('focusout');
+    })(jQuery);
+</script>

@@ -18,12 +18,13 @@
             <h1><a href="#/dados-basicos">Alfa Soluções RH</a></h1>
 
             <div class="container" style="background: #606; padding: 22px 0 30px; color: #fff;">
-                <div style="padding: 0 15px" class="col-xs-6">Bem vindo!</div>
-                <div style="padding: 0 15px; text-align: right" class="col-xs-6"><a ng-click="go('/')" href="javascript:;" style="color: #fff">Sair</a></div>
+                <div style="padding: 0 15px" class="col-xs-6">ALFA RH - Banco de Talentos</div>
             </div>
 	</header>
         
         <section id="site-content" class="container">
+            <button class="btn btn-default" style="right: 20px; position: absolute; z-index: 100" ng-show="usuarioService.usuarioLogado" ng-click="sair()">Sair</button>
+            <div class="loading-spiner-holder" data-loading><div class="loading-spiner">CARREGANDO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>></div></div>
             <div ng-view="ng-view"></div>
 	</section>
         
@@ -40,40 +41,19 @@
         </footer>
         
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="/site_alfatalentos/app/lib/jquery/jquery.maskedinput.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
+        <script src="/site_alfatalentos/app/lib/angular/angular-locale_pt-br.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         
         <script src="/site_alfatalentos/app/js/app.js"></script>
         <script src="/site_alfatalentos/app/js/controllers/loginCtrl.js"></script>
         <script src="/site_alfatalentos/app/js/controllers/cadastroInicialCtrl.js"></script>
         <script src="/site_alfatalentos/app/js/controllers/dadosBasicosCtrl.js"></script>
-        <script src="/site_alfatalentos/app/js/controllers/appCtrl.js"></script>
+        <script src="/site_alfatalentos/app/js/controllers/experienciaProfissionalCtrl.js"></script>
+        <script src="/site_alfatalentos/app/js/controllers/formacaoAcademicaCtrl.js"></script>
         <script src="/site_alfatalentos/app/js/services/loginService.js"></script>
     </body>
     
 </html>
-<!--
-	
-	
-	<script>
-	jQuery(function($){
-       $(".numberField").mask("9?9");
-       $(".dataField").mask("99/99/9999");
-       $(".mesAnoField").mask("99/9999");
-       $(".cepField").mask("99999-999");
-
-       $('.foneField').focusout(function(){
-           var phone, element;
-           element = $(this);
-           element.unmask();
-           phone = element.val().replace(/\D/g, '');
-           if(phone.length > 10) {
-               element.mask("(99) 99999-999?9");
-           } else {
-               element.mask("(99) 9999-9999?9");
-           }
-       }).trigger('focusout');
-	});
-	</script>
--->
