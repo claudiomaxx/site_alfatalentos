@@ -24,7 +24,15 @@
         
         <section id="site-content" class="container">
             <button class="btn btn-default" style="right: 20px; position: absolute; z-index: 100" ng-show="usuarioService.usuarioLogado" ng-click="sair()">Sair</button>
-            <div class="loading-spiner-holder" data-loading><div class="loading-spiner">CARREGANDO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>></div></div>
+            
+            <div data-loading>
+                <div class="loading-spiner-holder"></div>
+                <div class="loading-spiner">
+                    <img src="/site_alfatalentos/resources/img/ajax-loader.gif" alt="Aguarde..." width="42" height="42" />
+                    <div>CARREGANDO</div>
+                </div>
+            </div>
+            
             <div ng-view="ng-view"></div>
 	</section>
         
