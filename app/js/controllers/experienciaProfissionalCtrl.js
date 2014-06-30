@@ -45,7 +45,7 @@ app.controller('experienciaProfissionalCtrl', ['$http', '$scope', '$location', '
     
     $scope.excluir = function(item) {
         
-        $http.post('/site_alfatalentos/php/experiencia-profissional-delete.php', { id: item.id, usuario_id: $scope.usuario.id}).success(function(retorno){
+        $http.post('/talentos/php/experiencia-profissional-delete.php', { id: item.id, usuario_id: $scope.usuario.id}).success(function(retorno){
             if(retorno.mensagem === '') {
                 $scope.mensagem = "Dados excluídos com sucesso!";
                 
@@ -98,7 +98,7 @@ app.controller('experienciaProfissionalCtrl', ['$http', '$scope', '$location', '
         } else {
             $scope.experiencia.usuario_id = $scope.usuario.id;
             
-            var $promise = $http.post('/site_alfatalentos/php/experiencia-profissional.php', $scope.experiencia);
+            var $promise = $http.post('/talentos/php/experiencia-profissional.php', $scope.experiencia);
 
             $promise.then(function(retorno){
                 if(retorno.data.mensagem === '' && retorno.data.dados instanceof Object) {
@@ -130,7 +130,7 @@ app.controller('experienciaProfissionalCtrl', ['$http', '$scope', '$location', '
         if(response.mensagem === '' && response.usuario instanceof Object) {
             $scope.usuario = response.usuario;
             
-            $http.post('/site_alfatalentos/php/experiencia-profissional-lista.php', { usuario_id : $scope.usuario.id}).success(function(retorno){
+            $http.post('/talentos/php/experiencia-profissional-lista.php', { usuario_id : $scope.usuario.id}).success(function(retorno){
                 if(retorno.dados) {
                     $scope.items = retorno.dados;
                 }

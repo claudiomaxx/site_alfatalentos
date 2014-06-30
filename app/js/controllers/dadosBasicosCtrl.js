@@ -36,7 +36,7 @@ app.controller('dadosBasicosCtrl', ['$scope', '$location', '$http', '$filter', '
             usuario.estadoCivil_id = usuario.estadoCivil.codigo;
         }
 
-        var $promise = $http.post('/site_alfatalentos/php/dados-basicos.php', usuario);
+        var $promise = $http.post('/talentos/php/dados-basicos.php', usuario);
 
         $promise.then(function(retorno){
             if(retorno.data.mensagem === '') {

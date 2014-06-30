@@ -72,7 +72,7 @@ app.controller('formacaoAcademicaCtrl', ['$http', '$scope', '$location', 'usuari
     
     $scope.excluir = function(item) {
         
-        $http.post('/site_alfatalentos/php/formacao-academica-delete.php', { id: item.id, usuario_id: $scope.usuario.id}).success(function(retorno){
+        $http.post('/talentos/php/formacao-academica-delete.php', { id: item.id, usuario_id: $scope.usuario.id}).success(function(retorno){
             if(retorno.mensagem === '') {
                 $scope.mensagem = "Dados excluídos com sucesso!";
                 
@@ -136,7 +136,7 @@ app.controller('formacaoAcademicaCtrl', ['$http', '$scope', '$location', 'usuari
                 tipoFormacao: $scope.formacao.tipoFormacao ? $scope.formacao.tipoFormacao.codigo : ""
             };
             
-            var $promise = $http.post('/site_alfatalentos/php/formacao-academica.php', formacaoEnvio);
+            var $promise = $http.post('/talentos/php/formacao-academica.php', formacaoEnvio);
 
             $promise.then(function(retorno){
                 console.log(retorno);
@@ -168,7 +168,7 @@ app.controller('formacaoAcademicaCtrl', ['$http', '$scope', '$location', 'usuari
         if(response.mensagem === '' && response.usuario instanceof Object) {
             $scope.usuario = response.usuario;
             
-            $http.post('/site_alfatalentos/php/formacao-academica-lista.php', { usuario_id : $scope.usuario.id}).success(function(retorno){
+            $http.post('/talentos/php/formacao-academica-lista.php', { usuario_id : $scope.usuario.id}).success(function(retorno){
 
                 if(retorno.dados) {
                     $scope.items = retorno.dados;

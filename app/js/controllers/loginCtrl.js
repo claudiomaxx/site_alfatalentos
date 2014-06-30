@@ -15,7 +15,7 @@ app.controller('loginCtrl', ['$scope', '$location', '$http', 'usuarioService', f
             $scope.mensagem = "Senha não informada.";
             
         } else {
-            var $promise = $http.post('/site_alfatalentos/php/login.php', usuario);
+            var $promise = $http.post('/talentos/php/login.php', usuario);
 
             $promise.then(function(retorno){
                 if(retorno.data.mensagem === '' && retorno.data.usuario instanceof Object) {

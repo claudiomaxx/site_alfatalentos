@@ -2,7 +2,7 @@
 
 app.controller('cadastroInicialCtrl', ['$http', '$scope', '$location', 'usuarioService', function($http, $scope, $location, usuarioService){
     
-    $http.get('/site_alfatalentos/php/logout.php');
+    $http.get('/talentos/php/logout.php');
     
     $scope.mensagem = "";
     $scope.tipoCadastro = 0;
@@ -36,7 +36,7 @@ app.controller('cadastroInicialCtrl', ['$http', '$scope', '$location', 'usuarioS
                 usuario: $scope.usuario
             };
 
-            var $promise = $http.post('/site_alfatalentos/php/cadastro-inicial.php', cadastro);
+            var $promise = $http.post('/talentos/php/cadastro-inicial.php', cadastro);
 
             $promise.then(function(retorno){
                 if(retorno.data.mensagem === '') {

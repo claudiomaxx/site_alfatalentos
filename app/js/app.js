@@ -17,7 +17,7 @@ app.factory('usuarioService', ['$http', function($http) {
     return {
         usuarioLogado : usuarioLogado,
         getUsuario : function(){
-            return $http.get('/site_alfatalentos/php/usuario.php');
+            return $http.get('/talentos/php/usuario.php');
         }
     };
 }]);
